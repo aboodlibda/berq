@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertisement;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Share;
 
 class ArticlesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
     public function index()
     {
         $articles = Article::latest()->paginate();
@@ -52,7 +60,15 @@ class ArticlesController extends Controller
 
     public function show(Article $article)
     {
-//        return view('cms.articles.show',compact('article'));
+        $social = Share::page((env('APP_URL').'/articles/'.$article->id),$article->title)
+        ->facebook()
+        ->twitter()
+        ->linkedin()
+        ->whatsapp()
+        ->getRawLinks();
+        $advertisement = Advertisement::first();
+        $lastFour = Article::latest()->take(4)->get();
+        return view('cms.articles.show',compact('article','advertisement','lastFour','social'));
     }
 
     public function edit(Article $article)

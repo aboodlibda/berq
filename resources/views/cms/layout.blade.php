@@ -108,6 +108,8 @@
                         </a>
                     </li>
 
+
+
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-newspaper"></i>
@@ -137,7 +139,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
-                                الأقسام
+                                الفئات
                                 <i class="fas fa-angle-left right"></i>
                                 <span class="badge badge-info right">10</span>
                             </p>
@@ -146,13 +148,13 @@
                             <li class="nav-item">
                                 <a href="{{route('categories.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>كل الأقسام</p>
+                                    <p>كل الفئات</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('categories.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>إضافة قسم جديد</p>
+                                    <p>إضافة فئة جديد</p>
                                 </a>
                             </li>
                         </ul>
@@ -182,6 +184,25 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('sections.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-ad"></i>
+                            <p>
+                                الأقسام الرئيسية
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('advertisements.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-dollar-sign"></i>
+                            <p>
+                                الإعلانات
+                            </p>
+                        </a>
+                    </li>
+
 
                 </ul>
             </nav>

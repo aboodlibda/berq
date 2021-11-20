@@ -24,30 +24,30 @@
 {{--    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">--}}
 
     <!-- ==== Font Awesome ==== -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
     <!-- ==== Bootstrap Framework ==== -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
     <!-- ==== Bar Rating Plugin ==== -->
-    <link rel="stylesheet" href="css/fontawesome-stars-o.min.css">
+    <link rel="stylesheet" href="{{asset('css/fontawesome-stars-o.min.css')}}">
 
     <!-- ==== Main Stylesheet ==== -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
 
     <!-- ==== Responsive Stylesheet ==== -->
-    <link rel="stylesheet" href="css/responsive-style.css">
+    <link rel="stylesheet" href="{{asset('css/responsive-style.css')}}">
 
     <!-- ==== Theme Color Stylesheet ==== -->
-    <link rel="stylesheet" href="css/colors/theme-color-4.css" id="changeColorScheme">
+    <link rel="stylesheet" href="{{asset('css/colors/theme-color-4.css')}}" id="changeColorScheme">
 
     <!-- ==== RTL Stylesheets ==== -->
-    <link rel="stylesheet" href="css/font-awesome-rtl.css">
-    <link rel="stylesheet" href="css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" href="css/rtl-style.css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome-rtl.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-rtl.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/rtl-style.css')}}">
 
     <!-- ==== Custom Stylesheet ==== -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 
     <!-- ==== HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries ==== -->
     <!--[if lt IE 9]>
@@ -77,7 +77,25 @@
                     <ul class="header--topbar-info nav">
 {{--                        <li><i class="fa fm fa-map-marker"></i>New York</li>--}}
 {{--                        <li><i class="fa fm fa-mixcloud"></i>21<sup>0</sup> C</li>--}}
-                        <li><i class="fa fm fa-calendar"></i>اليوم (الأحد - 17 أبريل - 2021)</li>
+{{--                        <p id="demo"></p>--}}
+                        <li><i class="fa fm fa-calendar" ></i>اليوم ( <span id="date"></span>  )</li>
+                        <script>
+
+                            const days = ["الأحد","الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+                            const d = new Date();
+                            var dateObj = new Date();
+                            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                            // var day = dateObj.getUTCDate();
+                            var year = dateObj.getUTCFullYear();
+                            let day = days[d.getDay()];
+                            newdate = day + " - " + month + " - " + year ;
+
+
+
+                            document.getElementById("date").innerHTML = newdate;
+                        </script>
+
+
                     </ul>
                     <!-- Header Topbar Info End -->
                 </div>
@@ -85,7 +103,7 @@
                 <div class="float--right float--xs-none text-xs-center">
                     <!-- Header Topbar Action Start -->
                     <ul class="header--topbar-action nav">
-                        <li><a href="login-rtl.html"><i class="fa fm fa-user-o"></i>Login/Register</a></li>
+                        <li><a href="login-rtl.html"><i class="fa fm fa-user-o"></i>تسجيل دخول/الإدارة</a></li>
                     </ul>
                     <!-- Header Topbar Action End -->
 
@@ -123,8 +141,8 @@
                 <!-- Header Logo Start -->
                 <div class="header--logo text-center">
                     <h1 class="h1">
-                        <a href="home-1-rtl.html" class="btn-link">
-                            <img src="berq.jpg" alt="USNews Logo" style="width: 350px;height: 150px">
+                        <a href="{{route('main')}}" class="btn-link">
+                            <img src="{{asset('berq.jpg')}}" alt="USNews Logo" style="width: 350px;height: 150px">
                             <span class="hidden">شعار مجلة بيرق</span>
                         </a>
                     </h1>
@@ -150,10 +168,10 @@
                     <!-- Header Menu Links Start -->
                     <ul class="header--menu-links nav navbar-nav" data-trigger="hoverIntent">
                         @php
-                        $categories = \App\Models\Category::all();
+                        $categories = \App\Models\Category::limit(9)->get();
                         @endphp
                         @foreach($categories as $category)
-                        <li><a href="national-rtl.html">{{$category->name}}</a></li>
+                        <li><a href="{{route('categories.show',$category->id)}}">{{$category->name}}</a></li>
                         @endforeach
 
 
@@ -177,27 +195,20 @@
     <!-- News Ticker Start -->
     <div class="news--ticker">
         <div class="container">
+            @php
+                $titles = DB::table('articles')->select('title')->latest()->get();
+            @endphp
             <div class="title">
                 <h2>اَخر الأخبار &nbsp; :  </h2>
             </div>
 
             <div class="news-updates--list" data-marquee="true">
                 <ul class="nav">
+                    @foreach($titles as $item)
                     <li>
-                        <h3 class="h3"><a href="#">"حارس الأجواء".. مسيّرة صناعة سعودية</a></h3>
+                        <h3 class="h3"><a>{{$item->title}}</a></h3>
                     </li>
-                    <li>
-                        <h3 class="h3"><a href="#">شاهد.. مهاجم يجرح 15 ويشعل ناراً في قطار باليابان</a></h3>
-                    </li>
-                    <li>
-                        <h3 class="h3"><a href="#">44 نائباً ليبياً يرفضون "تدخل البعثة الأممية" بقوانين الانتخاب</a></h3>
-                    </li>
-                    <li>
-                        <h3 class="h3"><a href="#">الصحة العالمية: نحو مليون شخص يقضون تسمماً بالرصاص</a></h3>
-                    </li>
-                    <li>
-                        <h3 class="h3"><a href="#">بعد تقرير الاستخبارات الأميركية حول منشأ كورونا.. الصين ترد</a></h3>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -255,7 +266,7 @@
                         <!-- Widget Start -->
                         <div class="widget">
                             <div class="widget--title">
-                                <h2 class="h4">روابط مهمة</h2>
+                                <h2 class="h4">الأقسام</h2>
 
                                 <i class="icon fa fa-expand"></i>
                             </div>
@@ -263,13 +274,9 @@
                             <!-- Links Widget Start -->
                             <div class="links--widget">
                                 <ul class="nav">
-                                    <li><a href="#"> العرب والعالم</a></li>
-                                    <li><a href="#">الخليج العربي</a></li>
-                                    <li><a href="#">رياضة</a></li>
-                                    <li><a href="#">سوريا</a></li>
-                                    <li><a href="#">مصر</a></li>
-                                    <li><a href="#">أميركا</a></li>
-                                    <li><a href="#">إيران</a></li>
+                                    @foreach($categories as $category)
+                                    <li><a href="{{route('categories.show',$category->id)}}">{{$category->name}}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!-- Links Widget End -->
@@ -338,7 +345,7 @@
             <div class="social--bg bg--color-1"></div>
 
             <div class="container">
-                <p class="text float--left">. جميع حقوق الطبع محفوظة.  <a href="#">مجلة بيرق الإلكترونية</a>  2021 &copy;</p>
+                <p class="text float--left">. جميع حقوق الطبع محفوظة.  <a href="{{route('main')}}">مجلة بيرق الإلكترونية</a>  2021 &copy;</p>
 
                 <ul class="nav social float--right">
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -399,49 +406,46 @@
 <!-- Back To Top Button End -->
 
 <!-- ==== jQuery Library ==== -->
-<script src="js/jquery-3.2.1.min.js"></script>
+<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 
 <!-- ==== Bootstrap Framework ==== -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 
 <!-- ==== StickyJS Plugin ==== -->
-<script src="js/jquery.sticky.min.js"></script>
+<script src="{{asset('js/jquery.sticky.min.js')}}"></script>
 
 <!-- ==== HoverIntent Plugin ==== -->
-<script src="js/jquery.hoverIntent.min.js"></script>
+<script src="{{asset('js/jquery.hoverIntent.min.js')}}"></script>
 
 <!-- ==== Marquee Plugin ==== -->
-<script src="js/jquery.marquee.min.js"></script>
+<script src="{{asset('js/jquery.marquee.min.js')}}"></script>
 
 {{--<!-- ==== Validation Plugin ==== -->--}}
 {{--<script src="js/jquery.validate.min.js"></script>--}}
 
 <!-- ==== Isotope Plugin ==== -->
-<script src="js/isotope.min.js"></script>
+<script src="{{asset('js/isotope.min.js')}}"></script>
 
 <!-- ==== Resize Sensor Plugin ==== -->
-<script src="js/resizesensor.min.js"></script>
+<script src="{{asset('js/resizesensor.min.js')}}"></script>
 
 <!-- ==== Sticky Sidebar Plugin ==== -->
-<script src="js/theia-sticky-sidebar.min.js"></script>
+<script src="{{asset('js/theia-sticky-sidebar.min.js')}}"></script>
 
 <!-- ==== Zoom Plugin ==== -->
-<script src="js/jquery.zoom.min.js"></script>
+<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 
 <!-- ==== Bar Rating Plugin ==== -->
-<script src="js/jquery.barrating.min.js"></script>
-
-<!-- ==== Countdown Plugin ==== -->
-<script src="js/jquery.countdown.min.js"></script>
+<script src="{{asset('js/jquery.barrating.min.js')}}"></script>
 
 <!-- ==== RetinaJS Plugin ==== -->
-<script src="js/retina.min.js"></script>
+<script src="{{asset('js/retina.min.js')}}"></script>
 
 {{--<!-- ==== Google Map API ==== -->--}}
 {{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9f7sXWmqQ1E-ufRXV3VpXOn_ifKsDuc"></script>--}}
 
 <!-- ==== Main JavaScript ==== -->
-<script src="js/main.js"></script>
+<script src="{{asset('js/main.js')}}"></script>
 
 </body>
 </html>
