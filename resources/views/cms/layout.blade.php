@@ -73,7 +73,14 @@
     </nav>
     <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
+@php
+    $articles = \App\Models\Article::count();
+    $categories = \App\Models\Category::count();
+    $tags = \App\Models\Tag::count();
+@endphp
+
+
+<!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{route('dashboard')}}" class="brand-link">
@@ -108,7 +115,32 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{route('sections.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-ad"></i>
+                            <p>
+                                الأقسام الرئيسية
+                            </p>
+                        </a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a href="{{route('information.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-database"></i>
+                            <p>
+                                البيانات الرئيسية
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('advertisements.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-dollar-sign"></i>
+                            <p>
+                                الإعلانات
+                            </p>
+                        </a>
+                    </li>
 
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
@@ -116,7 +148,7 @@
                             <p>
                                 المقالات
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">6</span>
+                                <span class="badge badge-info right">{{$articles}}</span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -141,7 +173,7 @@
                             <p>
                                 الفئات
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">10</span>
+                                <span class="badge badge-info right">{{$categories}}</span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -166,7 +198,7 @@
                             <p>
                                 الوسوم
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">13</span>
+                                <span class="badge badge-info right">{{$tags}}</span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -185,23 +217,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{route('sections.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-ad"></i>
-                            <p>
-                                الأقسام الرئيسية
-                            </p>
-                        </a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a href="{{route('advertisements.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-dollar-sign"></i>
-                            <p>
-                                الإعلانات
-                            </p>
-                        </a>
-                    </li>
 
 
                 </ul>

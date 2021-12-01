@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advertisement;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Information;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,8 +68,9 @@ class ArticlesController extends Controller
         ->whatsapp()
         ->getRawLinks();
         $advertisement = Advertisement::first();
+        $information = Information::first();
         $lastFour = Article::latest()->take(4)->get();
-        return view('cms.articles.show',compact('article','advertisement','lastFour','social'));
+        return view('cms.articles.show',compact('article','information','advertisement','lastFour','social'));
     }
 
     public function edit(Article $article)

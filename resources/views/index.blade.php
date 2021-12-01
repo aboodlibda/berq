@@ -537,7 +537,6 @@
                                                   </li>
                                               @endif
                                           @endforeach
-
                                       </ul>
 
                                       <!-- Preloader Start -->
@@ -596,85 +595,84 @@
                               <div class="social--widget style--2">
                                   <ul class="nav row gutter--20">
                                       <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 facebook">
-                                          <a href="#">
+                                          <a href="{{$information->facebook}}" target="_blank">
                                                 <span class="icon">
                                                     <i class="fa fa-facebook"></i>
-                                                    <span>Share</span>
+{{--                                                    <span>Share</span>--}}
                                                 </span>
 
                                               <span class="text">
-                                                    <span>Facebook</span>
-                                                    <span>3.12 k</span>
+                                                    <span>فايسبوك</span>
+                                                    <span>فايسبوك</span>
                                                 </span>
                                           </a>
                                       </li>
 
                                       <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 twitter">
-                                          <a href="#">
+                                          < <a href="{{$information->twitter}}" target="_blank">
                                                 <span class="icon">
                                                     <i class="fa fa-twitter"></i>
-                                                    <span>Tweet</span>
+{{--                                                    <span>Tweet</span>--}}
                                                 </span>
 
                                               <span class="text">
-                                                    <span>Twitter</span>
-                                                    <span>869</span>
+                                                    <span>تويتر</span>
+                                                    <span>تويتر</span>
                                                 </span>
                                           </a>
                                       </li>
 
-                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 google-plus">
-                                          <a href="#">
+                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 youtube">
+                                          <a href="{{$information->youtube}}" target="_blank">
                                                 <span class="icon">
-                                                    <i class="fa fa-google-plus"></i>
-                                                    <span>Share</span>
+                                                    <i class="fa fa-youtube"></i>
+{{--                                                    <span>Share</span>--}}
                                                 </span>
 
                                               <span class="text">
-                                                    <span>Google+</span>
-                                                    <span>639</span>
+                                                    <span>يوتيوب</span>
+                                                    <span>يوتيوب</span>
                                                 </span>
                                           </a>
                                       </li>
 
-                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 dribbble">
-                                          <a href="#">
+                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 ">
+                                          <a href="{{$information->instagram}}" target="_blank" style="background-color: #ff0073">
                                                 <span class="icon">
-                                                    <i class="fa fa-dribbble"></i>
-                                                    <span>Share</span>
+                                                    <i class="fa fa-instagram"></i>
+{{--                                                    <span>Share</span>--}}
                                                 </span>
 
                                               <span class="text">
-                                                    <span>Dribbble</span>
-                                                    <span>483</span>
+                                                    <span>انستاقرام</span>
+                                                    <span>انستاقرام</span>
                                                 </span>
                                           </a>
                                       </li>
 
-                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 linkedin">
-                                          <a href="#">
+                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 " >
+                                          <a href="{{$information->snapchat}}" target="_blank" style="background-color: #fff900">
                                                 <span class="icon">
-                                                    <i class="fa fa-linkedin"></i>
-                                                    <span>Share</span>
+                                                    <i class="fa fa-snapchat"></i>
+{{--                                                    <span>Share</span>--}}
                                                 </span>
 
                                               <span class="text">
-                                                    <span>LinkedIn</span>
-                                                    <span>2.2 K</span>
+                                                    <span>سناب شات</span>
+                                                    <span>سناب شات</span>
                                                 </span>
                                           </a>
                                       </li>
 
-                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12 pinterest">
-                                          <a href="#">
+                                      <li class="col-md-6 col-sm-12 col-xs-6 col-xxs-12">
+                                          <a href="{{$information->tiktok}}" target="_blank" style="background-color: #000000">
                                                 <span class="icon">
-                                                    <i class="fa fa-pinterest-p"></i>
-                                                    <span>Pin it</span>
+                                                    <i class="fa fa-telegram"></i>
                                                 </span>
 
                                               <span class="text">
-                                                    <span>Pinterest</span>
-                                                    <span>493</span>
+                                                    <span>تيك توك</span>
+                                                    <span>تيك توك</span>
                                                 </span>
                                           </a>
                                       </li>
@@ -761,6 +759,7 @@
 
 
           </div>
+      </div>
       </div>
       <!-- Main Content Section End -->
 

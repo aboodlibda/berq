@@ -4,6 +4,7 @@ use App\Http\Controllers\AdvertisementsController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
 });
 Route::resource('articles',ArticlesController::class);
 Route::resource('categories',CategoriesController::class);
+Route::resource('information',InformationController::class);
 
 
 

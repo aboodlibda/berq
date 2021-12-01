@@ -103,7 +103,7 @@
                 <div class="float--right float--xs-none text-xs-center">
                     <!-- Header Topbar Action Start -->
                     <ul class="header--topbar-action nav">
-                        <li><a href="login-rtl.html"><i class="fa fm fa-user-o"></i>تسجيل دخول/الإدارة</a></li>
+                        <li><a ></a></li>
                     </ul>
                     <!-- Header Topbar Action End -->
 
@@ -123,11 +123,13 @@
 
                     <!-- Header Topbar Social Start -->
                     <ul class="header--topbar-social nav hidden-sm hidden-xxs">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+
+                        <li><a href="{{$information->facebook}}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{$information->twitter}}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{$information->youtube}}"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="{{$information->instagram}}"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="{{$information->snapchat}}"><i class="fa fa-snapchat"></i></a></li>
+                        <li><a href="{{$information->tiktok}}"><i class="fa fa-telegram"></i></a></li>
                     </ul>
                     <!-- Header Topbar Social End -->
                 </div>
@@ -139,15 +141,27 @@
         <div class="header--mainbar">
             <div class="container">
                 <!-- Header Logo Start -->
-                <div class="header--logo text-center">
+                <div class="header--logo float--left float--sm-none text-sm-center">
                     <h1 class="h1">
                         <a href="{{route('main')}}" class="btn-link">
-                            <img src="{{asset('berq.jpg')}}" alt="USNews Logo" style="width: 350px;height: 150px">
-                            <span class="hidden">شعار مجلة بيرق</span>
+                            <img src="{{asset('berq.jpg')}}" alt="شعار بيرق" style="width: 250px">
+                            <span class="hidden">مجلة بيرق الالكترونية</span>
                         </a>
                     </h1>
                 </div>
                 <!-- Header Logo End -->
+
+                <!-- Header Ad Start -->
+                <div class="col-md-8 float--right float--sm-none text-sm-center">
+
+                    <div class="ad--space">
+                        <a class="center-block" style="height: 120px;background: url({{asset('advImages/'.$advertisement->adv_1)}}) no-repeat;background-size: cover;background-position: 0% 50%; ">
+
+                        </a>
+                    </div>
+                    <!-- Advertisement End -->
+                </div>
+                <!-- Header Ad End -->
             </div>
         </div>
         <!-- Header Mainbar End -->
@@ -169,6 +183,7 @@
                     <ul class="header--menu-links nav navbar-nav" data-trigger="hoverIntent">
                         @php
                         $categories = \App\Models\Category::limit(9)->get();
+                        $information = \App\Models\Information::first();
                         @endphp
                         @foreach($categories as $category)
                         <li><a href="{{route('categories.show',$category->id)}}">{{$category->name}}</a></li>
@@ -179,13 +194,6 @@
                     <!-- Header Menu Links End -->
                 </div>
 
-                <!-- Header Search Form Start -->
-{{--                <form action="#" class="header--search-form float--right" data-form="validate">--}}
-{{--                    <input type="search" name="search" placeholder="Search..." class="header--search-control form-control" required>--}}
-
-{{--                    <button type="submit" class="header--search-btn btn"><i class="header--search-icon fa fa-search"></i></button>--}}
-{{--                </form>--}}
-                <!-- Header Search Form End -->
             </div>
         </div>
         <!-- Header Navbar End -->
@@ -213,6 +221,7 @@
             </div>
         </div>
     </div>
+
     <!-- News Ticker End -->
     @yield('content')
     <!-- Footer Section Start -->
@@ -233,27 +242,20 @@
                             <!-- About Widget Start -->
                             <div class="about--widget">
                                 <div class="content">
-                                    <p>لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى)
-                                        ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي
-                                        منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص،</p>
+                                    <p>{{$information->about}}</p>
                                 </div>
 
                                 <div class="action">
-                                    <a href="#" class="btn-link">المزيد ...<i class="fa flm fa-angle-double-left"></i></a>
                                 </div>
 
                                 <ul class="nav">
                                     <li>
-                                        <i class="fa fa-map"></i>
-                                        <span>العنوان بالتفصيل</span>
-                                    </li>
-                                    <li>
                                         <i class="fa fa-envelope-o"></i>
-                                        <a href="mailto:example@example.com">example@example.com</a>
+                                        <a href="mailto:{{$information->email}}">{{$information->email}}</a>
                                     </li>
                                     <li>
                                         <i class="fa fa-phone"></i>
-                                        <a href="tel:+123456789">+123 456 (789)</a>
+                                        <a href="tel:{{$information->phone}}">{{$information->phone}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -345,14 +347,19 @@
             <div class="social--bg bg--color-1"></div>
 
             <div class="container">
-                <p class="text float--left">. جميع حقوق الطبع محفوظة.  <a href="{{route('main')}}">مجلة بيرق الإلكترونية</a>  2021 &copy;</p>
+                <p class="text float--left">. جميع حقوق الطبع محفوظة.  <a href="/">مجلة بيرق الإلكترونية</a>  2021 &copy;</p>
 
                 <ul class="nav social float--right">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+                    <li><a href="{{$information->facebook}}"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="{{$information->twitter}}"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="{{$information->youtube}}"><i class="fa fa-youtube"></i></a></li>
+                    <li><a href="{{$information->instagram}}"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="{{$information->snapchat}}"><i class="fa fa-snapchat"></i></a></li>
+                    <li><a href="{{$information->tiktok}}"><i class="fa fa-telegram"></i></a></li>
+
+
+
+
                 </ul>
 
 {{--                <ul class="nav links float--right">--}}
@@ -372,29 +379,24 @@
 <div id="stickySocial" class="sticky--left">
     <ul class="nav">
         <li>
-            <a href="#">
+            <a href="{{$information->facebook}}">
                 <i class="fa fa-facebook"></i>
                 <span>تابعنا على فايسبوك</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{$information->twitter}}">
                 <i class="fa fa-twitter"></i>
                 <span>تابعنا على تويتر</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{$information->youtube}}">
                 <i class="fa fa-youtube-play"></i>
                 <span>تابعنا على اليوتيوب</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-linkedin"></i>
-                <span>تابعنا على لينكيد إن</span>
-            </a>
-        </li>
+
     </ul>
 </div>
 <!-- Sticky Social End -->

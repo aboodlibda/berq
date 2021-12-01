@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advertisement;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Information;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -44,7 +45,8 @@ class CategoriesController extends Controller
     {
         $lastFour = Article::latest()->take(4)->get();
         $advertisement = Advertisement::first();
-        return view('cms.categories.show',compact('category','lastFour','advertisement'));
+        $information = Information::first();
+        return view('cms.categories.show',compact('category','lastFour','advertisement','information'));
     }
 
     public function edit(Category $category)
